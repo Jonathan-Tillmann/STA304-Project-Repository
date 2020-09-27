@@ -1,0 +1,61 @@
+---
+title: "Which voters should Politicians Target during Elections?"
+author: "Jonathan Tillmann"
+date: "9/27/2020"
+abstract: Data on the Canadian election is integral in shaping the leadership of the country. In this post we explore the 2019 Canadian election phone survey. We find that a majority of voters are in the age range of 39-51 and 59-66, and voters in the 18-39 age range have a much poorer turnout rate. These findings can be used to target important groups during elections for politicians to reach the biggest audience possible.
+output: html_document
+---
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>There’s a common saying for anyone running for a political position: every vote counts. However, during the election seasons many politicians may be losing a significant portion of their potential votes by missing certain groups with their campaigns. Every time the elections roll around in Canada, the Canadian Election Study conducts a massive survey of eligible voters for eager statisticians to analyze. I decided to look through their phone survey conducted in 2019 and found some interesting patterns presenting new research opportunities. According to the data, there may be an age range containing the most active voters and a range that has the lowest turnout.</p>
+<p>Politicians may be able to target these groups in different ways to maximize the amount of votes they receive during elections. The data showed the largest group of voters was in the age range of 39-51 and 59-66. Finding the major political concerns of these voters may be the key to a significant portion of the votes during an election. The other major finding from my exploration into the phone survey was a large portion of eligible voters aged 20-39 years old never turn up to the polls. Politicians could be losing votes with the younger generation by not actively targeting the media they use. Youtube, tiktok, instagram, and any other social media platform popular with the younger population could be an in for politicians targeting this untapped demographic.</p>
+<p>However, further analyses need to be performed before concluding my findings as signficant. My findings are general trends in the data and only represent the exploration stage before statistically significant conclusions can be made. The survey itself is also liable to non-response bias, in which potential voters like those without phones could have not been represented. The survey can also be subject to response bias, with people being dishonest in their answers to questions to keep up appearances. The study contains other questions I did not explore in this post that include voters’ major concerns that can be investigated in relation to their age. A regression model between major concerns and voters’ age would present a future study that could provide insight into obtaining the majority’s votes.</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>The data used in the post comes from the Canadian Election Study (CES) 2019 phone survey. I only used responses to two questions asked in the survey, being what year the respondent was born and how likely they were to vote in the election. The question about how likely the respondent was to vote had set responses: I Don’t know, I refuse to answer, I want to skip the question, I am certain, I am likely, I am unlikely, I am certain not to vote, or I already voted in the advanced poll. The two questions I looked at had 4021 responses each, providing a large sample size in which significant observations made from patterns in the data can be made. There wasn’t any missing data with these two questions so they were left untouched before plotting.</p>
+<pre class="r"><code>get_ces(&quot;ces2019_phone&quot;)</code></pre>
+<pre><code>## TO CITE THIS SURVEY FILE:
+## 
+## - Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, &#39;2019 Canadian Election Study - Phone Survey&#39;, https://doi.org/10.7910/DVN/8RHLG1, Harvard Dataverse, V1, UNF:6:eyR28qaoYlHj9qwPWZmmVQ== [fileUNF]
+## 
+## - Stephenson, Laura, Allison Harrel, Daniel Rubenson and Peter Loewen. Forthcoming. &#39;Measuring Preferences and Behaviour in the 2019 Canadian Election Study,&#39; Canadian Journal of Political Science.
+## 
+## LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8RHLG1</code></pre>
+<p>#Plots</p>
+<pre class="r"><code> ces2019_phone %&gt;%
+  ggplot(aes(x = q2)) + geom_histogram(binwidth = 1) + labs(x = &quot;Year of Birth&quot;,
+  y = &quot;Number of Respondents&quot;, title = &quot;Distribution of Birth Years for Survey Respondents&quot;, caption = &quot;Data: Stephenson, Harell, Rubenson, Loewen, 2020&quot;)</code></pre>
+<pre><code>## Don&#39;t know how to automatically pick scale for object of type haven_labelled/vctrs_vctr/double. Defaulting to continuous.</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>barplot(table(sjlabelled::as_label(ces2019_phone$q10)), beside = TRUE, legend.text = TRUE, xlab = &quot;Voting Likelyhood&quot;, ylab = &quot;Number of Respondents&quot;, main = &quot;Survey Respondents Voting Likelyhood&quot;, sub =&quot;Data: Stephenson, Harell, Rubenson, Loewen, 2020&quot;)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+# Discussion
+The first graph represents the age demographic of respondents to the CES 2019 web survey. The data is approximately normally distributed with a slight right skew due to the lack of respondents aged 70 plus. The information contained in the graph is important to highlight the percentage of voters in each age bracket. The second graph was made to showcase that the majority of respondents that participated in the online survey planned to vote or already had. The first graph shows a significant portion of voters in the age brackets of 39-51 and 59-66. We can also use the graph to extrapolate data on age demographics for voter turnout. Using estimates of the population of Canada in 2019 from Statistics Canada, about 34.9% of the population–above 19 years of age–is in the range of 20 to 39 years old (The age brackets were from 15-19 and 20-25 unfortunately, so I was unable to find the population size from 18 to 39 years old). From a glance at the first graph, the area from 1980-2001 is significantly smaller than around 35% of the total area. We can conclude from the graph that this age group has a poorer voter turnout than people aged 40 plus.</p>
+</div>
+<div id="weaknesses-and-next-steps" class="section level1">
+<h1>Weaknesses and next steps</h1>
+<p>The findings of this post cannot be taken as statistically significant with no actual analyses carried out on the age demographics of voters. The voter turnout needs more data with a regression model made between age and if a vote was cast at the polls. The CES survey itself is also host to some respondents providing inaccurate data as looking through answers for some questions show respondents giving out non-serious responses. A face-to-face survey would provide the most accurate results with more honesty given from respondents in person, specifically in regards to the answers needed for this data exploration. Studies on the next elections with increased ads targeting lower voter turnout age groups on media platforms primarily viewed by those groups would provide greater insight into the topic.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>Statistics Canada. Table 17-10-0005-01 Population estimates on July 1st, by age and sex
+JJ Allaire, Jeffrey Horner, Yihui Xie, Vicent Marti and Natacha Porte (2019). markdown: Render Markdown with
+the C Library ‘Sundown’. R package version 1.1. <a href="https://CRAN.R-project.org/package=markdown" class="uri">https://CRAN.R-project.org/package=markdown</a>
+Paul A. Hodgetts and Rohan Alexander (2020). cesR: Access the CES Datasets a Little Easier.. R package
+version 0.1.0.
+Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, “2019 Canadian Election Study - Phone Survey”, <a href="https://doi.org/10.7910/DVN/8RHLG1" class="uri">https://doi.org/10.7910/DVN/8RHLG1</a>, Harvard Dataverse, V1
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686,
+<a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a>
+Tierney N (2017). “visdat: Visualising Whole Data Frames.” <em>JOSS</em>, <em>2</em>(16), 355. doi: 10.21105/joss.00355
+(URL: <a href="https://doi.org/10.21105/joss.00355" class="uri">https://doi.org/10.21105/joss.00355</a>), &lt;URL: <a href="http://dx.doi.org/10.21105/joss.00355" class="uri">http://dx.doi.org/10.21105/joss.00355</a>&gt;.
+Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu and Shannon Ellis (2020).
+skimr: Compact and Flexible Summaries of Data. R package version 2.1.2.
+<a href="https://CRAN.R-project.org/package=skimr" class="uri">https://CRAN.R-project.org/package=skimr</a>
+Lüdecke D (2020). <em>sjlabelled: Labelled Data Utility Functions (Version 1.1.7)</em>. doi: 10.5281/zenodo.1249215
+(URL: <a href="https://doi.org/10.5281/zenodo.1249215" class="uri">https://doi.org/10.5281/zenodo.1249215</a>), &lt;URL: <a href="https://CRAN.R-project.org/package=sjlabelled" class="uri">https://CRAN.R-project.org/package=sjlabelled</a>&gt;.
+RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL <a href="http://www.rstudio.com/" class="uri">http://www.rstudio.com/</a>.</p>
+</div>

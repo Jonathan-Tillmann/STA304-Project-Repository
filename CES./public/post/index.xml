@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Jonathan&#39;s Stats Blog</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Jonathan&#39;s Stats Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Which voters should Politicians Target during Elections?</title>
+      <link>/1/01/01/which-voters-should-politicians-target-during-elections/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/1/01/01/which-voters-should-politicians-target-during-elections/</guid>
+      <description>Introduction There’s a common saying for anyone running for a political position: every vote counts. However, during the election seasons many politicians may be losing a significant portion of their potential votes by missing certain groups with their campaigns. Every time the elections roll around in Canada, the Canadian Election Study conducts a massive survey of eligible voters for eager statisticians to analyze. I decided to look through their phone survey conducted in 2019 and found some interesting patterns presenting new research opportunities.</description>
+    </item>
+    
+  </channel>
+</rss>
